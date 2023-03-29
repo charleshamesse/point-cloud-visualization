@@ -1,18 +1,15 @@
-import React, { forwardRef, Suspense, useState, setState, useRef, useMemo } from 'react'
-import { Canvas, useThree, useLoader } from '@react-three/fiber'
+import React, { Suspense, useState, useRef } from 'react'
+import { Canvas, useLoader } from '@react-three/fiber'
 
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 import {
   View,
-  Preload,
   OrbitControls,
   PerspectiveCamera,
   TransformControls,
@@ -40,9 +37,9 @@ function Model(props) {
 
 
 export default function App(props) {
-  const [ref, view1, view2] = useRefs()
+  const [ref] = useRefs()
 
-    const [pointClouds, setPointClouds] = useState([
+    const [pointClouds, _] = useState([
     {
       name: "Azure Kinect DK",
       object: "/models/improve-ak.pcd",
