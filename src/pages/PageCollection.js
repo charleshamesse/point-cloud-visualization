@@ -39,7 +39,7 @@ function Model(props) {
 export default function App(props) {
   const [ref] = useRefs()
 
-    const [pointClouds, _] = useState([
+    const [pointClouds, ] = useState([
     {
       name: "Azure Kinect DK",
       object: "/models/improve-ak.pcd",
