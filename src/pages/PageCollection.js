@@ -22,12 +22,14 @@ import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader'
 function Model(props) {
 
   console.log(props)
-  // let geometry = null
+  let geometry = null
   let result = useLoader(PCDLoader, props.src,  xhr => console.log((xhr.loaded / xhr.total * 100) + '% loaded'))
-  // geometry = result.geometry
+  geometry = result.geometry
   return (
     <TransformControls scale={1} size={2} mode="rotate" position={[0, 0, 0]}>
-      <primitive object={result} scale={0.4} />;
+      <points geometry={geometry} scale={[props.scale, props.scale, props.scale]}>
+      <pointsMaterial color="#000000" transparent opacity={0.7} size={0.01} />
+    </points>
     </TransformControls>
   )
 }
@@ -36,7 +38,6 @@ function Model(props) {
 
 export default function App(props) {
   const [ref] = useRefs()
-    /*
     const [pointClouds, ] = useState([
     {
       name: "Azure Kinect DK",
@@ -84,7 +85,7 @@ export default function App(props) {
       scale: 1.0
     },
   ])
-  */
+  /*
   const [pointClouds, ] = useState([
     {
       name: "From cellars to apartment",
@@ -97,6 +98,7 @@ export default function App(props) {
       scale: 1.0
     },
   ])
+  */
 
   let pointCloudRefs = useRef([]);
   pointCloudRefs.current = [0, 0, 0, 0, 0, 0, 0, 0, 0].map(
@@ -121,7 +123,7 @@ export default function App(props) {
       <Grid container>
         {pointClouds.map((pointCloud, index) => {
           return (
-            <Grid xs={6} item={true} key={index}>
+            <Grid xs={4} item={true} key={index}>
               <Item>
                 <Typography variant="h6" color="inherit" noWrap>
                     {pointCloud.name}
