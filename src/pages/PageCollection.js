@@ -27,9 +27,7 @@ function Model(props) {
   geometry = result.geometry
   return (
     <TransformControls scale={1} size={2} mode="rotate" position={[0, 0, 0]}>
-      <points geometry={geometry} scale={[props.scale, props.scale, props.scale]}>
-      <pointsMaterial color="#000000" transparent opacity={0.7} size={0.01} />
-    </points>
+      <primitive object={result} />
     </TransformControls>
   )
 }
@@ -38,67 +36,13 @@ function Model(props) {
 
 export default function App(props) {
   const [ref] = useRefs()
-    const [pointClouds, ] = useState([
-    {
-      name: "Azure Kinect DK",
-      object: "/models/improve-ak.pcd",
-      scale: 0.001
-    },
-    {
-      name: "Intel Realsense L515",
-      object: "/models/improve-rs_l515.pcd",
-      scale: 1.0
-    },
-    {
-      name: "Intel Realsense D455 (Active)",
-      object: "/models/improve-rs_d455_laser.pcd",
-      scale: 1
-    },
-    {
-      name: "Intel Realsense D455 (Passive)",
-      object: "/models/improve-rs_d455_nolaser.pcd",
-      scale: 1
-    },
-    {
-      name: "Zed Mini",
-      object: "/models/improve-zed_mini.pcd",
-      scale: .001
-    },
-    {
-      name: "SC-Depth",
-      object: "/models/improve-sc_depth.pcd",
-      scale: 1.0
-    },
-    {
-      name: "Depth Former",
-      object: "/models/improve-depth_former.pcd",
-      scale: 1.0
-    },
-    {
-      name: "Bins Former",
-      object: "/models/improve-bins_former.pcd",
-      scale: 1.0
-    },
-    {
-      name: "TC MonoDepth",
-      object: "/models/improve-tc_monodepth.pcd",
-      scale: 1.0
-    },
-  ])
-  /*
   const [pointClouds, ] = useState([
     {
-      name: "From cellars to apartment",
-      object: "/models/devil/out_050.pcd",
-      scale: 1.0
-    },
-    {
-      name: "From cellars to apartment, filtered",
-      object: "/models/devil/out_filtered_050.pcd",
+      name: "Downsampled with voxel size 20cm (15.6MB)",
+      object: "/models/fl/run-2_fast-lio_map_down-5.pcd",
       scale: 1.0
     },
   ])
-  */
 
   let pointCloudRefs = useRef([]);
   pointCloudRefs.current = [0, 0, 0, 0, 0, 0, 0, 0, 0].map(
@@ -117,19 +61,19 @@ export default function App(props) {
     <Box ref={ref} sx={{ flexGrow: 1, mt: 10 }}>
       <Container maxWidth="sm" sx={{py: 5 }}>
         <Typography variant="h3" color="inherit" noWrap>
-          Collection: Lab Scene
+          Fabriek Logistiek Hall 2
         </Typography>
       </Container>
       <Grid container>
         {pointClouds.map((pointCloud, index) => {
           return (
-            <Grid xs={4} item={true} key={index}>
+            <Grid xs={12} item={true} key={index}>
               <Item>
                 <Typography variant="h6" color="inherit" noWrap>
                     {pointCloud.name}
                 </Typography>
                 
-                <div ref={pointCloudRefs.current[index]} className="view scale"  style={{ height: '50vh', width: '100%' }} />
+                <div ref={pointCloudRefs.current[index]} className="view scale"  style={{ height: '80vh', width: '100%' }} />
 
               </Item>
             </Grid>
@@ -168,7 +112,6 @@ const Common = ({ color }) => (
     <ambientLight intensity={0.5} />
     <pointLight position={[20, 30, 10]} intensity={1} />
     <pointLight position={[-10, -10, -10]} color="blue" />
-    <Environment preset="dawn" />
     <PerspectiveCamera makeDefault fov={40} position={[0, 0, 12]} />
   </>
 )
