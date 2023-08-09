@@ -13,7 +13,6 @@ import {
   OrbitControls,
   PerspectiveCamera,
   TransformControls,
-  Environment,
 } from '@react-three/drei'
 import useRefs from 'react-use-refs'
 import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader'
@@ -22,9 +21,9 @@ import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader'
 function Model(props) {
 
   console.log(props)
-  let geometry = null
+  // let geometry = null
   let result = useLoader(PCDLoader, props.src,  xhr => console.log((xhr.loaded / xhr.total * 100) + '% loaded'))
-  geometry = result.geometry
+  // geometry = result.geometry
   return (
     <TransformControls scale={1} size={2} mode="rotate" position={[0, 0, 0]}>
       <primitive object={result} />
